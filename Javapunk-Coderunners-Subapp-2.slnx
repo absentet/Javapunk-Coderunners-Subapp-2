@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="javapunk-coderunners-subapp-2.client/javapunk-coderunners-subapp-2.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="Javapunk-Coderunners-Subapp-2.Server/Javapunk-Coderunners-Subapp-2.Server.csproj" />
+</Solution>

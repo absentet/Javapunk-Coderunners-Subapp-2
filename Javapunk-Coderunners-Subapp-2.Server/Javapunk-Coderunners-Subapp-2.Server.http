@@ -1,0 +1,6 @@
+@Javapunk_Coderunners_Subapp_2.Server_HostAddress = http://localhost:5147
+
+GET {{Javapunk_Coderunners_Subapp_2.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
