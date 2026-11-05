@@ -1,4 +1,9 @@
+using Javapunk_Coderunners_Subapp_2.Server.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add database context
+builder.Services.AddDbContext<QuizDbContext>();
 
 // Add services to the container.
 
