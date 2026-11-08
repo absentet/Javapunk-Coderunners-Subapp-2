@@ -1,10 +1,12 @@
 import Button from "../components/Button";
+import "../components/Layout.css";
 
 function Home() {
     return (
-        <div>
-            <h1>Javapunk Code Runners</h1>
-            <Button>Start</Button>
+        <div className="container main-box centered">
+            <h1>Javapunk Coderunners</h1>
+            <h2>Become the ultimate coderunner!</h2>
+            <Button className="btn-primary">START!</Button>
         </div>
     );
 }

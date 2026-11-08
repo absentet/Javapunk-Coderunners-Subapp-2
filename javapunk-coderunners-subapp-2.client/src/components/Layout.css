@@ -1,0 +1,35 @@
+.container.main-box {
+    color: #f7e40f;
+    position: relative;
+    z-index: 1;
+    background-color: #544C70CC;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 680px;
+    margin: 40px auto;
+}
+      /*De som skal være sentrert på siden*/
+    .container.main-box.centered {
+        margin: 40px auto;
+        text-align: center;
+    }
+
+.container-login {
+    color: #f7e40f;
+    position: relative;
+    z-index: 1;
+    background-color: #544C70CC;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 300px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.auth-page {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

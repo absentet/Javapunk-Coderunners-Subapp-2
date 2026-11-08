@@ -13,19 +13,23 @@
     --button-secondary-border: #9e2d9e;
 }
 
-html, body, #root {
-    font-family: 'Digivolve';;
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    background-color: transparent;
-}
-
-
 @font-face {
     font-family: 'Digivolve';
     src: url('./assets/fonts/PixelDigivolve.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+}
+
+html, body, #root {
+    font-family: 'Digivolve';
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: transparent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Digivolve';
+
 }

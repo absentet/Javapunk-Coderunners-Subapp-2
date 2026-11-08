@@ -1,10 +1,35 @@
 .btn {
-    font-sixe: 26px;
+    font-size: 26px;
     font-family: 'Digivolve';
     color: var(--button-primary-text);
     background-color: var(--button-primary-bg);
     border-color: var(--button-primary-border);
 }
+    .btn-primary:hover {
+        color: var(--button-primary-text);
+        background-color: var(--button-primary-hover);
+        border-color: var(--button-primary-hover);
+    }
+
+.startbtn {
+    font-size: 32px;
+    margin-top: 40px;
+    background-color: #6EBDEA;
+    border-color: #6B9BCF;
+}
+
+    .startbtn:hover {
+        background-color: #6B9BCF;
+        border-color: #5B5F90;
+    }
+
+.btn-primary {
+    font-size: 26px;
+    color: var(--button-primary-text);
+    background-color: var(--button-primary-bg);
+    border-color: var(--button-primary-border);
+}
+
     .btn-primary:hover {
         color: var(--button-primary-text);
         background-color: var(--button-primary-hover);
