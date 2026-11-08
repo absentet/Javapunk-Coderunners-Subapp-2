@@ -1,6 +1,14 @@
 using Javapunk_Coderunners_Subapp_2.Server.Data;
+using Javapunk_Coderunners_Subapp_2.Server.Repositories;
+using Javapunk_Coderunners_Subapp_2.Server.Models;
+using Javapunk_Coderunners_Subapp_2.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
+builder.Services.AddScoped<IQuizService, QuizService>();
+
 
 // Add database context
 builder.Services.AddDbContext<QuizDbContext>();
