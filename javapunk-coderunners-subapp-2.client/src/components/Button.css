@@ -1,0 +1,12 @@
+.btn {
+    font-sixe: 26px;
+    font-family: 'Digivolve';
+    color: var(--button-primary-text);
+    background-color: var(--button-primary-bg);
+    border-color: var(--button-primary-border);
+}
+    .btn-primary:hover {
+        color: var(--button-primary-text);
+        background-color: var(--button-primary-hover);
+        border-color: var(--button-primary-hover);
+    }
