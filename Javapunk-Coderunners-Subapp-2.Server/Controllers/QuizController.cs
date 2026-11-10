@@ -1,18 +1,23 @@
+using System.IdentityModel.Tokens.Jwt;
 using Javapunk_Coderunners_Subapp_2.Server.Dtos;
 using Javapunk_Coderunners_Subapp_2.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Javapunk_Coderunners_Subapp_2.Server.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class QuizController : ControllerBase
 {
     private readonly IQuizService _quizService;
+    private readonly IUserService _userService;
 
-    public QuizController(IQuizService quizService)
+    public QuizController(IQuizService quizService, IUserService userService)
     {
         _quizService = quizService;
+        _userService = userService;
     }
 
     // GET api/quiz/modules
@@ -70,7 +75,19 @@ public class QuizController : ControllerBase
             return BadRequest("No answers were submitted.");
         }
 
+        string? userIdText = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        if (!int.TryParse(userIdText, out int userId))
+        {
+            return Unauthorized();
+        }
+
         var result = await _quizService.SubmitQuizAsync(request.Answers);
+
+        bool saved = await _userService.AddScoreToUserScoreAsync(userId, result.Score);
+        if (!saved)
+        {
+            return NotFound("Could not save the user's score.");
+        }
 
         return Ok(result);
     }
