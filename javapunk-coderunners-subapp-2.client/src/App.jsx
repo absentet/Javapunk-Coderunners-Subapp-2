@@ -1,7 +1,10 @@
 ﻿import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
+import HomePage from './home/HomePage';
+import LoginChoicePage from './account/LoginChoicePage';
+import LoginPage from './account/LoginPage';
+import RegisterPage from './account/RegisterPage';
+import AdminLoginPage from './account/AdminLoginPage';
 import Layout from './components/Layout';
 import './App.css';
 
@@ -13,8 +16,11 @@ function App() {
         <div className="App">
             <Layout blurred={!isHome}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<LoginChoicePage />} />
+                    <Route path="/login/user" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/login/admin" element={<AdminLoginPage />} />
                 </Routes>
             </Layout>
         </div>
