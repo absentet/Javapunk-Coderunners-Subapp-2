@@ -5,6 +5,7 @@ import LoginChoicePage from './account/LoginChoicePage';
 import LoginPage from './account/LoginPage';
 import RegisterPage from './account/RegisterPage';
 import AdminLoginPage from './account/AdminLoginPage';
+import MainMenuPage from './menu/MainMenuPage';
 import Layout from './components/Layout';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/login/user" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login/admin" element={<AdminLoginPage />} />
+                    <Route path="/menu" element={<MainMenuPage />} />
                 </Routes>
             </Layout>
         </div>
