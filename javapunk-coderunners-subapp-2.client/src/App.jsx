@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './home/HomePage';
 import LoginChoicePage from './account/LoginChoicePage';
@@ -11,7 +11,8 @@ import AdminOptionsPage from './admin/AdminOptionsPage';
 import QnAOptionsPage from './admin/QnAOptionsPage';
 import ModuleOptionsPage from './admin/ModuleOptionsPage';
 import CreateQuestionPage from './admin/CreateQuestionPage';
-import EditQuestionsPage from './admin/EditQuestionsPage';
+import ListEditQuestionsPage from './admin/ListEditQuestionsPage';
+import EditQuestionPage from './admin/EditQuestionPage';
 
 function App() {
     const location = useLocation();
@@ -30,7 +31,8 @@ function App() {
                     <Route path="/admin/questions" element={<QnAOptionsPage />} />
                     <Route path="/admin/modules" element={<ModuleOptionsPage />} />
                     <Route path="/admin/questions/create" element={<CreateQuestionPage />} />
-                    <Route path="/admin/questions/edit" element={<EditQuestionsPage />} />
+                    <Route path="/admin/questions/edit" element={<ListEditQuestionsPage />} />
+                    <Route path="/admin/questions/edit/:questionId" element={<EditQuestionPage />} />
 
                 </Routes>
             </Layout>

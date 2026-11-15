@@ -8,6 +8,7 @@ namespace Javapunk_Coderunners_Subapp_2.Server.Services
         Task CreateQuestionAsync(UpsertQuestionDto question);
         Task UpdateQuestionAsync(UpsertQuestionDto question, int questionId);
         Task DeleteQuestionAsync(int questionId);
-        Task<IEnumerable<UpsertQuestionDto>> GetAllQuestionsAsync();
+        Task<IEnumerable<FetchQuestionDto>> GetAllQuestionsAsync();
+        Task<FetchQuestionDto> GetQuestionWithId(int questionId);
     }
 }

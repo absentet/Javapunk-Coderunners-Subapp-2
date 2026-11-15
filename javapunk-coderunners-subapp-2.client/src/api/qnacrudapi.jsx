@@ -25,3 +25,29 @@ export const GetQuestions = async () => {
 
     return response.json();
 }
+
+export const GetQuestionWithId = async (questionId) => {
+    const response = await fetch(`${basePath}/getwithid/${questionId}`, {
+        method: 'GET',
+        mode: 'cors',
+    });
+
+    if (!response.ok) {
+        throw new Error(`Could not load question (${response.status} ${response.statusText})`);
+    }
+
+    return response.json();
+}
+
+export const UpdateQuestion = async (question, questionId) => {
+    const response = await fetch(`${basePath}/update?questionId=${questionId}`, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(question)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Could not update question (${response.status} ${response.statusText})`);
+    }
+}

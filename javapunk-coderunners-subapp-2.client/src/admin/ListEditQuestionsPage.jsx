@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { GetQuestions } from "../api/qnacrudapi";
+import { useNavigate } from "react-router-dom";
 
-function EditQuestionsPage() {
+function ListEditQuestionsPage() {
+    const navigate = useNavigate();
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -12,6 +14,10 @@ function EditQuestionsPage() {
             .catch((requestError) => setError(requestError.message))
             .finally(() => setLoading(false));
     }, []);
+
+    function handleEditQuestionClick(questionId) {
+        navigate("" + questionId);
+    }
 
   return (
       <section className="question-list">
@@ -25,7 +31,9 @@ function EditQuestionsPage() {
                       <li key={`${question.moduleId}-${questionIndex}`}>
                           <p>{question.questionText}</p>
                           <ul>
+                              <button onClick={() => handleEditQuestionClick(question.questionId)}>Edit</button>
                               {question.answers.map((answer, answerIndex) => (
+
                                   <li key={answerIndex}>
                                       {answer.answerText}{answer.isCorrect ? " (Correct)" : ""}
                                   </li>
@@ -39,4 +47,4 @@ function EditQuestionsPage() {
   );
 }
 
-export default EditQuestionsPage;
+export default ListEditQuestionsPage;

@@ -36,6 +36,7 @@ public class QuestionRepository : IQuestionRepository
         return await _context.Questions
             .AsNoTracking()
             .Include(q => q.Answers)
+            .Include(q => q.Modules)
             .FirstOrDefaultAsync(q => q.Id == questionId);
     }
 

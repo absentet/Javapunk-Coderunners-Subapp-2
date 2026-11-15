@@ -94,12 +94,13 @@ namespace Javapunk_Coderunners_Subapp_2.Server.Services
             }
         }
 
-        public async Task<IEnumerable<UpsertQuestionDto>> GetAllQuestionsAsync()
+        public async Task<IEnumerable<FetchQuestionDto>> GetAllQuestionsAsync()
         {
             try
             {
                 var questions = await _questionRepository.GetAllWithAnswersAsync();
-                var response = questions.Select(q => new UpsertQuestionDto(
+                var response = questions.Select(q => new FetchQuestionDto(
+                    q.Id,
                     q.Modules!.Id,
                     q.Question_text,
                     [.. q.Answers.Select(a => new CreateAnswerOptionDto
@@ -113,6 +114,29 @@ namespace Javapunk_Coderunners_Subapp_2.Server.Services
             catch (Exception e)
             {
                 _logger.LogError(e, "Failed to retrieve questions");
+                throw;
+            }
+        }
+
+        public async Task<FetchQuestionDto> GetQuestionWithId(int questionId)
+        {
+            try
+            {
+                var question = await _questionRepository.GetByIdWithAnswersAsync(questionId)
+                    ?? throw new Exception($"A question with id {questionId} does not exist");
+
+                return new FetchQuestionDto(
+                    question.Id,
+                    question.Modules!.Id,
+                    question.Question_text,
+                    [.. question.Answers.Select(answer => new CreateAnswerOptionDto(
+                        answer.Answer_text,
+                        answer.Is_correct))]
+                );
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to retrieve question");
                 throw;
             }
         }

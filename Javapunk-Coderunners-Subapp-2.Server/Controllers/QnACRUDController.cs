@@ -55,4 +55,14 @@ public class QnACRUDController : ControllerBase
         var questions = await _qnACRUDService.GetAllQuestionsAsync();
         return Ok(questions);
     }
+
+    // GET api/qnacrud/getwithid/{questionId}
+    [HttpGet("getwithid/{questionId}")]
+    // TODO: Remove when auth is in place
+    [AllowAnonymous]
+    public async Task<IActionResult> GetQuestionWithId(int questionId)
+    {
+        var question = await _qnACRUDService.GetQuestionWithId(questionId);
+        return Ok(question);
+    }
 }
