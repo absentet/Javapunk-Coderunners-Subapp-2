@@ -7,6 +7,11 @@ import RegisterPage from './account/RegisterPage';
 import AdminLoginPage from './account/AdminLoginPage';
 import Layout from './components/Layout';
 import './App.css';
+import AdminOptionsPage from './admin/AdminOptionsPage';
+import QnAOptionsPage from './admin/QnAOptionsPage';
+import ModuleOptionsPage from './admin/ModuleOptionsPage';
+import CreateQuestionPage from './admin/CreateQuestionPage';
+import EditQuestionsPage from './admin/EditQuestionsPage';
 
 function App() {
     const location = useLocation();
@@ -21,6 +26,12 @@ function App() {
                     <Route path="/login/user" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login/admin" element={<AdminLoginPage />} />
+                    <Route path="/admin/options" element={<AdminOptionsPage />} />
+                    <Route path="/admin/questions" element={<QnAOptionsPage />} />
+                    <Route path="/admin/modules" element={<ModuleOptionsPage />} />
+                    <Route path="/admin/questions/create" element={<CreateQuestionPage />} />
+                    <Route path="/admin/questions/edit" element={<EditQuestionsPage />} />
+
                 </Routes>
             </Layout>
         </div>

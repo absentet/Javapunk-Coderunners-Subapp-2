@@ -6,4 +6,5 @@ namespace Javapunk_Coderunners_Subapp_2.Server.Repositories;
 public interface IModuleRepository
 {
     Task<List<Modules>> GetAllAsync();
+    Task<Modules?> GetByIdAsync(int moduleId);
 }

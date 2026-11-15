@@ -20,4 +20,11 @@ public class ModuleRepository : IModuleRepository
             .OrderBy(m => m.Id)
             .ToListAsync();
     }
+
+    public async Task<Modules?> GetByIdAsync(int moduleId)
+    {
+        return await _context.Modules
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.Id == moduleId);
+    }
 }
