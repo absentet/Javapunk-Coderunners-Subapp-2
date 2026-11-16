@@ -1,8 +1,8 @@
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../components/Layout.css";
 
 function MainMenuPage() {
-    const navigate = useNavigation();
+    const navigate = useNavigate();
     const isAdmin = false; // Placeholder for admin check, replace with actual logic
 
     return (
