@@ -64,6 +64,8 @@ function LoginPage() {
 
                     <br />
                     <br />
+                    
+                    //If login fails, display error message to user
                     {errorMessage && (
                         <p className="error-message">
                             {errorMessage}

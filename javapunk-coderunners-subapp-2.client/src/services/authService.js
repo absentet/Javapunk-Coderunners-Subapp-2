@@ -5,7 +5,7 @@ async function getErrorMessage(response) {
     const responseText = await response.text();
 
     if (!responseText) {
-        return `Login failed (${response.status})`;
+        return "Request failed (${response.status})";
     }
 
     try {
@@ -26,6 +26,7 @@ async function getErrorMessage(response) {
     }
 }
 
+//Login function for existing users
 export async function login(username, password) {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
@@ -42,5 +43,22 @@ export async function login(username, password) {
 
         throw new Error(await getErrorMessage(response));
     }
+    return response.json();
+}
+
+//Creating a new user
+export async function register(username, password){
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+    });
+    
+    if (!response.ok) {
+        throw new Error(await getErrorMessage(response));
+    }   
+
     return response.json();
 }
