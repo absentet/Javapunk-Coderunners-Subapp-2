@@ -13,6 +13,7 @@ import ModuleOptionsPage from './admin/ModuleOptionsPage';
 import CreateQuestionPage from './admin/CreateQuestionPage';
 import ListEditQuestionsPage from './admin/ListEditQuestionsPage';
 import EditQuestionPage from './admin/EditQuestionPage';
+import ListDeleteQuestionsPage from './admin/ListDeleteQuestionsPage';
 
 function App() {
     const location = useLocation();
@@ -33,7 +34,7 @@ function App() {
                     <Route path="/admin/questions/create" element={<CreateQuestionPage />} />
                     <Route path="/admin/questions/edit" element={<ListEditQuestionsPage />} />
                     <Route path="/admin/questions/edit/:questionId" element={<EditQuestionPage />} />
-
+                    <Route path="/admin/questions/delete" element={<ListDeleteQuestionsPage />} />
                 </Routes>
             </Layout>
         </div>

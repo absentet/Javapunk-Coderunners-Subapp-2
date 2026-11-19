@@ -40,6 +40,8 @@ public class QnACRUDController : ControllerBase
 
     // DELETE api/qnacrud/delete
     [HttpDelete("delete")]
+    // TODO: Remove when auth is in place
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteQuestion(int questionId)
     {
         await _qnACRUDService.DeleteQuestionAsync(questionId);

@@ -51,3 +51,13 @@ export const UpdateQuestion = async (question, questionId) => {
         throw new Error(`Could not update question (${response.status} ${response.statusText})`);
     }
 }
+
+export const DeleteQuestion = async (questionId) => {
+    const response = await fetch(`${basePath}/delete?questionId=${questionId}`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error(`Could not delete question (${response.status} ${response.statusText})`);
+    }
+}

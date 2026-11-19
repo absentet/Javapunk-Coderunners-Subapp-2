@@ -31,7 +31,6 @@ function ListEditQuestionsPage() {
                       <li key={`${question.moduleId}-${questionIndex}`}>
                           <p>{question.questionText}</p>
                           <ul>
-                              <button onClick={() => handleEditQuestionClick(question.questionId)}>Edit</button>
                               {question.answers.map((answer, answerIndex) => (
 
                                   <li key={answerIndex}>
@@ -39,6 +38,7 @@ function ListEditQuestionsPage() {
                                   </li>
                               ))}
                           </ul>
+                          <button onClick={() => handleEditQuestionClick(question.questionId)}>Edit</button>
                       </li>
                   ))}
               </ul>
