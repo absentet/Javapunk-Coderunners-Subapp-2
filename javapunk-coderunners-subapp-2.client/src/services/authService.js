@@ -62,3 +62,35 @@ export async function register(username, password){
 
     return response.json();
 }
+
+//Login for admin
+export async function adminLogin(password){
+    const response = await fetch(`${API_BASE_URL}/auth/admin-login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+    });
+
+    const responseText = await response.text();
+
+    let result = {};
+    try {
+        result = responseText ? JSON.parse(responseText) : {};
+    } catch {
+        result = { message: responseText };
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            result.message ||
+            result.title ||
+            result.detail ||
+            responseText ||
+            "Admin login failed."
+        );
+    }
+
+    return result;
+}

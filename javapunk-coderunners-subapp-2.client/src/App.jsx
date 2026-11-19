@@ -6,6 +6,7 @@ import LoginPage from './account/LoginPage';
 import RegisterPage from './account/RegisterPage';
 import AdminLoginPage from './account/AdminLoginPage';
 import MainMenuPage from './menu/MainMenuPage';
+import ModuleListPage from './modules/ModulesListPage';
 import Layout from './components/Layout';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login/admin" element={<AdminLoginPage />} />
                     <Route path="/menu" element={<MainMenuPage />} />
+                    <Route path="/modules" element={<ModuleListPage />} />
                 </Routes>
             </Layout>
         </div>

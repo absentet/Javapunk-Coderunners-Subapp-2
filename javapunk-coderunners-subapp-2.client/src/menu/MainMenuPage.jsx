@@ -3,12 +3,11 @@ import "../components/Layout.css";
 
 function MainMenuPage() {
     const navigate = useNavigate();
-    const isAdmin = false; // Placeholder for admin check, replace with actual logic
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
 
     return (
         <div className="container main-box centered">
             <h1>Main Menu</h1>
-            // Add "you are logged in as" message here, with username and role
             
             {!isAdmin && (
                 <>
@@ -23,6 +22,7 @@ function MainMenuPage() {
 
             {isAdmin && (
                 <>
+                <div class="text-success-custom"> You are logged in as admin.</div>
                 <button className="btn btn-primary" onClick={() => navigate("/admin/modules")}>
                     Module Options
                 </button>

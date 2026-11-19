@@ -33,3 +33,36 @@
     justify-content: center;
     align-items: center;
 }
+
+.modulesAndQuiz {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 24px 0;
+    box-sizing: border-box;
+}
+
+.modulesAndQuiz .container.main-box {
+    margin: 0 auto;
+}
+
+.module-button {
+    display: block;
+    padding: 10px 20px;
+    font-size: 32px;
+}
+
+    .module-button:nth-of-type(even) {
+        margin-left: auto;
+    }
+
+    .module-button:nth-of-type(odd) {
+        margin-right: auto;
+    }
+
+.text-success-custom {
+    color: #E3DC9D;
+}
