@@ -64,7 +64,42 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task UpdateQuestionAsync(Questions question)
     {
-        _context.Questions.Update(question);
+        var existingQuestion = await _context.Questions
+            .Include(q => q.Answers)
+            .FirstOrDefaultAsync(q => q.Id == question.Id)
+            ?? throw new InvalidOperationException($"A question with id {question.Id} does not exist");
+
+        existingQuestion.Question_text = question.Question_text;
+
+        if (question.Modules is not null)
+        {
+            _context.Modules.Attach(question.Modules);
+            existingQuestion.Modules = question.Modules;
+        }
+
+        var existingAnswers = existingQuestion.Answers.OrderBy(answer => answer.Id).ToList();
+        var answersToUpdate = Math.Min(existingAnswers.Count, question.Answers.Count);
+
+        for (var i = 0; i < answersToUpdate; i++)
+        {
+            existingAnswers[i].Answer_text = question.Answers[i].Answer_text;
+            existingAnswers[i].Is_correct = question.Answers[i].Is_correct;
+        }
+
+        if (existingAnswers.Count > question.Answers.Count)
+        {
+            _context.Answers.RemoveRange(existingAnswers.Skip(question.Answers.Count));
+        }
+
+        foreach (var answer in question.Answers.Skip(answersToUpdate))
+        {
+            existingQuestion.Answers.Add(new Answers
+            {
+                Answer_text = answer.Answer_text,
+                Is_correct = answer.Is_correct
+            });
+        }
+
         await _context.SaveChangesAsync();
     }
 
