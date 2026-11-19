@@ -9,7 +9,7 @@ import Layout from './components/Layout';
 import './App.css';
 import AdminOptionsPage from './admin/AdminOptionsPage';
 import QnAOptionsPage from './admin/QnAOptionsPage';
-import ModuleOptionsPage from './admin/ModuleOptionsPage';
+import ModuleOptionsPage from './admin/CreateModulePage';
 import CreateQuestionPage from './admin/CreateQuestionPage';
 import ListEditQuestionsPage from './admin/ListEditQuestionsPage';
 import EditQuestionPage from './admin/EditQuestionPage';
