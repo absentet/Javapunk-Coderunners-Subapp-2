@@ -37,4 +37,27 @@ public class TokenService : ITokenService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    public string CreateAdminToken()
+    {
+        string keyText = _configuration["Jwt:Key"]
+            ?? throw new InvalidOperationException("Jwt:Key is missing in appsettings.json");
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyText));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var claims = new []
+        {
+            new Claim(ClaimTypes.Role, "Admin")
+        };
+
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(2),
+            signingCredentials: credentials);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
 }

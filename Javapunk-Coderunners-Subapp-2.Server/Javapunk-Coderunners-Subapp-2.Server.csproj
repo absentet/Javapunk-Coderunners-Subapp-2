@@ -8,6 +8,7 @@
     <SpaRoot>..\javapunk-coderunners-subapp-2.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:63573</SpaProxyServerUrl>
+    <UserSecretsId>129890e5-9cb5-4418-af29-e5fd546aa699</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
