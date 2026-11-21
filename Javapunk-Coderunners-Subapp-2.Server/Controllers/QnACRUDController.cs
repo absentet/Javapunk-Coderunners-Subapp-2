@@ -1,5 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Javapunk_Coderunners_Subapp_2.Server.Dtos;
+﻿using Javapunk_Coderunners_Subapp_2.Server.Dtos;
 using Javapunk_Coderunners_Subapp_2.Server.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

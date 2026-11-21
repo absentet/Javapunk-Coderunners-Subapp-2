@@ -1,8 +1,5 @@
 ﻿using Javapunk_Coderunners_Subapp_2.Server.Dtos;
-using Javapunk_Coderunners_Subapp_2.Server.Models;
 using Javapunk_Coderunners_Subapp_2.Server.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Javapunk_Coderunners_Subapp_2.Server.Services
 {

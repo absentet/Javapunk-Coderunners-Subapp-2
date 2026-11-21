@@ -1,7 +1,7 @@
 namespace Javapunk_Coderunners_Subapp_2.Server.Dtos;
 
 public record ModuleDto(int Id, string Name);
-
+public record CreateModuleDto(string ModuleName);
 public record AnswerOptionDto(int Id, string Text);
 
 public record QuestionDto(int Id, string Text, List<AnswerOptionDto> Answers);

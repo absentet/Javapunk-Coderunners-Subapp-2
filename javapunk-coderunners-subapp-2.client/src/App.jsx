@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import HomePage from './home/HomePage';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import './App.css';
+import AdminLoginPage from './account/AdminLoginPage';
 import LoginChoicePage from './account/LoginChoicePage';
 import LoginPage from './account/LoginPage';
 import RegisterPage from './account/RegisterPage';
-import AdminLoginPage from './account/AdminLoginPage';
-import Layout from './components/Layout';
-import './App.css';
 import AdminOptionsPage from './admin/AdminOptionsPage';
-import QnAOptionsPage from './admin/QnAOptionsPage';
-import ModuleOptionsPage from './admin/CreateModulePage';
+import ModuleOptionsPage from './admin/ModulesOptionsPage'
 import CreateQuestionPage from './admin/CreateQuestionPage';
-import ListEditQuestionsPage from './admin/ListEditQuestionsPage';
+import CreateModulePage from './admin/CreateModulePage';
 import EditQuestionPage from './admin/EditQuestionPage';
+import EditModulePage from './admin/EditModulePage';
 import ListDeleteQuestionsPage from './admin/ListDeleteQuestionsPage';
+import ListDeleteModulesPage from './admin/ListDeleteModulesPage';
+import ListEditQuestionsPage from './admin/ListEditQuestionsPage';
+import ListEditModulesPage from './admin/ListEditModulesPage'
+import QnAOptionsPage from './admin/QnAOptionsPage';
+import Layout from './components/Layout';
+import HomePage from './home/HomePage';
 
 function App() {
     const location = useLocation();
@@ -35,6 +38,10 @@ function App() {
                     <Route path="/admin/questions/edit" element={<ListEditQuestionsPage />} />
                     <Route path="/admin/questions/edit/:questionId" element={<EditQuestionPage />} />
                     <Route path="/admin/questions/delete" element={<ListDeleteQuestionsPage />} />
+                    <Route path="/admin/modules/create" element={<CreateModulePage />} />
+                    <Route path="/admin/modules/edit" element={<ListEditModulesPage />} />
+                    <Route path="/admin/modules/edit/:moduleId" element={<EditModulePage />} />
+                    <Route path="/admin/modules/delete" element={<ListDeleteModulesPage />} />
                 </Routes>
             </Layout>
         </div>

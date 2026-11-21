@@ -1,5 +1,4 @@
 ﻿using Javapunk_Coderunners_Subapp_2.Server.Dtos;
-using Javapunk_Coderunners_Subapp_2.Server.Models;
 
 namespace Javapunk_Coderunners_Subapp_2.Server.Services
 {
