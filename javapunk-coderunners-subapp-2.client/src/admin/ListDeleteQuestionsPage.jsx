@@ -58,10 +58,10 @@ function ListDeleteQuestionsPage() {
                                 </div>
 
                                 <button
-                                    className="btn btn-primary admin-list-action"
+                                    className="btn btn-primary btn-danger"
                                     onClick={() => handleDeleteQuestion(question.questionId)}
                                 >
-                                    Edit
+                                    Delete
                                 </button>
                             </li>
                         ))}
