@@ -5,7 +5,7 @@ import LoginChoicePage from './account/LoginChoicePage';
 import LoginPage from './account/LoginPage';
 import RegisterPage from './account/RegisterPage';
 import AdminOptionsPage from './admin/AdminOptionsPage';
-import ModuleOptionsPage from './admin/ModulesOptionsPage'
+import ModuleOptionsPage from './admin/ModulesOptionsPage';
 import CreateQuestionPage from './admin/CreateQuestionPage';
 import CreateModulePage from './admin/CreateModulePage';
 import EditQuestionPage from './admin/EditQuestionPage';
@@ -13,8 +13,10 @@ import EditModulePage from './admin/EditModulePage';
 import ListDeleteQuestionsPage from './admin/ListDeleteQuestionsPage';
 import ListDeleteModulesPage from './admin/ListDeleteModulesPage';
 import ListEditQuestionsPage from './admin/ListEditQuestionsPage';
-import ListEditModulesPage from './admin/ListEditModulesPage'
+import ListEditModulesPage from './admin/ListEditModulesPage';
 import QnAOptionsPage from './admin/QnAOptionsPage';
+import MainMenuPage from './menu/MainMenuPage';
+import ModuleListPage from './modules/ModulesListPage';
 import Layout from './components/Layout';
 import HomePage from './home/HomePage';
 
@@ -31,6 +33,8 @@ function App() {
                     <Route path="/login/user" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login/admin" element={<AdminLoginPage />} />
+                    <Route path="/menu" element={<MainMenuPage />} />
+                    <Route path="/modules" element={<ModuleListPage />} />
                     <Route path="/admin/options" element={<AdminOptionsPage />} />
                     <Route path="/admin/questions" element={<QnAOptionsPage />} />
                     <Route path="/admin/modules" element={<ModuleOptionsPage />} />

@@ -13,7 +13,7 @@ function Home() {
         <div className="container main-box centered">
             <h1>Javapunk Coderunners</h1>
             <h2>Become the ultimate coderunner!</h2>
-            <Button className="btn-primary" onClick={handleStartClick}>
+            <Button className="btn btn-primary" onClick={handleStartClick}>
                 START!
             </Button>
         </div>

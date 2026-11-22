@@ -6,4 +6,5 @@ namespace Javapunk_Coderunners_Subapp_2.Server.Services;
 public interface ITokenService
 {
     string CreateToken(Users user);
+    string CreateAdminToken();
 }
