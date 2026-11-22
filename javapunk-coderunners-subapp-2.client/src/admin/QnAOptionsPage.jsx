@@ -35,7 +35,7 @@ function QnAOptionsPage() {
                 </Button>
                 <Button className="btn-primary btn-option" onClick={handleDeleteQuestionClick}>
                     Delete Questions
-                </Button>   
+                </Button>
                 <Button className="btn-primary btn-option" onClick={handleAdminOptionsClick}>
                     Back to Options
                 </Button>

@@ -1,0 +1,46 @@
+.admin-list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    margin: 24px 0;
+    list-style: none;
+}
+
+.admin-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background-color: #3E3658CC;
+    border: 1px solid #A995FF;
+    border-radius: 8px;
+}
+
+.admin-question-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-list-label {
+    margin: 0;
+    overflow-wrap: anywhere;
+    text-align: left;
+}
+
+.admin-answer-list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-answer {
+    margin: 4px 0;
+    padding: 6px 10px;
+    text-align: left;
+}
+
+.admin-list-action {
+    flex-shrink: 0;
+}

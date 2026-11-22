@@ -30,3 +30,13 @@
     width: 100%;
     margin: 5px;
 }
+
+.btn-danger {
+    color: var(--button-primary-text);
+    background-color: #7B263A;
+    border-color: #A83A54;
+}
+    .btn-danger:hover {
+        background-color: #A83A54;
+        border-color: #A83A54;
+    }
