@@ -11,10 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
+builder.Services.AddScoped<IQnACRUDService, QnACRUDService>();
 builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IModuleCRUDService, ModuleCRUDService>();
 
 string jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("Jwt:Key is missing in appsettings.json.");
@@ -42,6 +44,15 @@ builder.Services
 builder.Services.AddDbContext<QuizDbContext>();
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ClientApp", policy =>
+    {
+        policy.WithOrigins("https://localhost:63573")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -72,6 +83,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("ClientApp");
 
 app.UseCors("ClientApp");
 

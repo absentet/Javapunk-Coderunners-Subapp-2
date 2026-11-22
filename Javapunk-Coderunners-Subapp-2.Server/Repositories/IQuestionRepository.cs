@@ -9,5 +9,8 @@ public interface IQuestionRepository
     Task<List<Questions>> GetAllWithAnswersAsync();
     Task<Questions?> GetByIdWithAnswersAsync(int questionId);
     Task<List<Questions>> GetByIdsWithAnswersAsync(IEnumerable<int> questionIds);
+    Task AddQuestionAsync (Questions question);
+    Task UpdateQuestionAsync(Questions question);
+    Task DeleteQuestionAsync(Questions question);
 }
  
