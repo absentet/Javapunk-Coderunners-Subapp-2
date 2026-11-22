@@ -18,6 +18,9 @@ function ListEditModulesPage() {
     function handleEditModuleClick(moduleId) {
         navigate("" + moduleId);
     }
+    function handleBackToOptionsClick() {
+        navigate("/admin/modules");
+    }
 
     return (
         <section className="module-list">
@@ -35,6 +38,11 @@ function ListEditModulesPage() {
                     ))}
                 </ul>
             )}
+            <p>
+                <button type="button" className="btn-primary btn" onClick={handleBackToOptionsClick}>
+                    Back to Options
+                </button>
+            </p>
         </section>
     );
 }

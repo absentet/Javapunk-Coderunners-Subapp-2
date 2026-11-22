@@ -19,6 +19,10 @@ function ListEditQuestionsPage() {
         navigate("" + questionId);
     }
 
+    function handleBackToOptionsClick() {
+        navigate("/admin/questions");
+    }
+
   return (
       <section className="question-list">
           <h2>Questions</h2>
@@ -43,6 +47,11 @@ function ListEditQuestionsPage() {
                   ))}
               </ul>
           )}
+          <p>
+              <button type="button" className="btn-primary btn" onClick={handleBackToOptionsClick}>
+                  Back to Options
+              </button>
+          </p>
       </section>
   );
 }

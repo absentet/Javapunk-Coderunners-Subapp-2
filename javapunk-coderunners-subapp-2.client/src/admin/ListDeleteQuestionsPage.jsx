@@ -26,6 +26,9 @@ function ListDeleteQuestionsPage() {
             setError(requestError.message);
         }
     }
+    function handleBackToOptionsClick() {
+        navigate("/admin/questions");
+    }
 
     return (
         <section className="question-list">
@@ -51,6 +54,11 @@ function ListDeleteQuestionsPage() {
                     ))}
                 </ul>
             )}
+            <p>
+                <button type="button" className="btn-primary btn" onClick={handleBackToOptionsClick}>
+                    Back to Options
+                </button>
+            </p>
         </section>
     );
 }

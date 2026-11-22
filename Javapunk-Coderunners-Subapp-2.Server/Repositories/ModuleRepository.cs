@@ -21,7 +21,13 @@ public class ModuleRepository : IModuleRepository
 
     public async Task DeleteModuleAsync(Modules module)
     {
+        var linkedQuestions = await _context.Questions.Where(q => q.Modules == module).ToListAsync();
+        var linkedCompletedModules = await _context.Completed_modules.Where(cm => cm.Modules == module).ToListAsync();
+
+        _context.Questions.RemoveRange(linkedQuestions);
+        _context.Completed_modules.RemoveRange(linkedCompletedModules);
         _context.Modules.Remove(module);
+
         await _context.SaveChangesAsync();
     }
 

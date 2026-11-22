@@ -25,6 +25,9 @@ function ListDeleteModulesPage() {
             setError(requestError.message);
         }
     }
+    function handleBackToOptionsClick() {
+        navigate("/admin/modules");
+    }
 
     return (
         <section className="module-list">
@@ -42,6 +45,11 @@ function ListDeleteModulesPage() {
                     ))}
                 </ul>
             )}
+            <p>
+                <button type="button" className="btn-primary btn" onClick={handleBackToOptionsClick}>
+                    Back to Options
+                </button>
+            </p>
         </section>
     );
 }

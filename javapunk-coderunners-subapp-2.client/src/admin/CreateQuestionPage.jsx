@@ -47,7 +47,7 @@ function CreateQuestionPage() {
             <form onSubmit={handleCreateQuestion} className="form-container">
                 <div className="form-group">
                     <label htmlFor="moduleId">Module (1-5)</label>
-                    <input type="number" min="1" max="5" step="1" className="form-control" id="moduleId" name="moduleId" required />
+                    <input type="number" className="form-control" id="moduleId" name="moduleId" required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="questionText">Question Text</label>
