@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { adminLogin } from "../services/authService";
+import { useAuth } from "../auth/AuthContext";
 
 //Admin login page for administrators to access the admin modules page
 
 function AdminLoginPage() {
     const navigate = useNavigate();
+    const { loginAdmin } = useAuth();
 
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -17,11 +18,7 @@ function AdminLoginPage() {
         setIsSubmitting(true);
 
         try {
-            const result = await adminLogin(password);
-
-            localStorage.setItem("authToken", result.token);
-            localStorage.setItem("isAdmin", String(result.isAdmin));
-
+            await loginAdmin(password);
             navigate("/menu");
         } catch (error) {
             setErrorMessage(error.message);
@@ -53,7 +50,7 @@ function AdminLoginPage() {
                     <br />
 
                     <button 
-                        type="button" 
+                        type="submit" 
                         className="btn btn-primary"
                         disabled={isSubmitting}
                     >

@@ -40,3 +40,16 @@
         background-color: #A83A54;
         border-color: #A83A54;
     }
+
+.btn-secondary-custom {
+    font-size: 16px;
+    color: var(--button-secondary-text);
+    background-color: var(--button-secondary-bg);
+    border-color: var(--button-secondary-border);
+}
+
+    .btn-secondary-custom:hover {
+        color: var(--button-secondary-text);
+        background-color: var(--button-secondary-hover);
+        border-color: var(--button-secondary-hover);
+    }

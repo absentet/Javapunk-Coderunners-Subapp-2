@@ -45,17 +45,17 @@ function ModuleListPage() {
                             <span
                                 key={module.id}
                                 className="btn-primary module-button disabled-module"
-                                aria-didabled="true"
+                                aria-disabled="true"
                             >
-                                {module.moduleName}
+                                {module.name}
                             </span>
                         ) : (
                             <button
                                 key={module.id}
                                 className="btn-primary module-button"
-                                onClick={() => navigate(`/quiz/start/${module.id}`)}
+                                onClick={() => navigate(`/quiz/modules/${module.id}`)}
                             >
-                                {module.moduleName}
+                                {module.name}
                             </button>
                         );
                     })}

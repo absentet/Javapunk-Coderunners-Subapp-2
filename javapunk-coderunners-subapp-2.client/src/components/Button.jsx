@@ -1,9 +1,20 @@
 //Generell knappe-komponent som kan brukes til flere ulike knapper
 import "./Button.css";
 
-function Button({ onClick, children, className = "" }) {
+function Button({ 
+    onClick,
+    children, 
+    className = "",
+    type = "button",
+    disabled = false,
+}) {
     return (
-        <button onClick={onClick} className={`btn ${className}`}>
+        <button 
+            type={type}
+            onClick={onClick} 
+            className={`btn ${className}`}
+            disabled={disabled}
+        >
             {children}
         </button>
     );

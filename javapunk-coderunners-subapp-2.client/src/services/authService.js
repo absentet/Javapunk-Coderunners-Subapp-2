@@ -5,7 +5,7 @@ async function getErrorMessage(response) {
     const responseText = await response.text();
 
     if (!responseText) {
-        return "Request failed (${response.status})";
+        return `Request failed (${response.status})`;
     }
 
     try {

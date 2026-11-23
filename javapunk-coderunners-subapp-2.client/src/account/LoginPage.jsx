@@ -1,11 +1,12 @@
 //Normal login for users with an account
-import {useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login as loginUser } from "../services/authService";
+import { useAuth } from "../auth/AuthContext";
 import "../components/Layout.css";
 
 function LoginPage() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -17,15 +18,7 @@ function LoginPage() {
         setErrorMessage("");
 
         try {
-            const authResponse = await loginUser(username, password);
-            localStorage.setItem("authToken", authResponse.token);
-            localStorage.setItem("user",
-                JSON.stringify({ 
-                    userName: authResponse.username,
-                    userId: authResponse.userId,
-                })
-            );
-
+            await login(username, password);
             navigate("/menu");
         } catch (error) {
             setErrorMessage(error.message);
@@ -58,14 +51,13 @@ function LoginPage() {
                         name="password" 
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
-                        autoComplete="password"
+                        autoComplete="current-password"
                         required 
                     />
 
                     <br />
                     <br />
                     
-                    //If login fails, display error message to user
                     {errorMessage && (
                         <p className="error-message">
                             {errorMessage}
