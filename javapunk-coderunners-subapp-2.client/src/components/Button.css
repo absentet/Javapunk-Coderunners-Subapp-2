@@ -7,11 +7,7 @@
     padding: 8px 16px;
     border-radius: 6px;
 }
-    .btn-primary:hover {
-        color: var(--button-primary-text);
-        background-color: var(--button-primary-hover);
-        border-color: var(--button-primary-hover);
-    }
+
 
 .btn-primary {
     font-size: 26px;

@@ -1,35 +1,32 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getModules, getMyProgress } from "../services/moduleService";
+import Button from "../components/Button";
 import "../components/Layout.css";
 
 function ModuleListPage() {
     const navigate = useNavigate();
-    const [modules, setModules] = useState([]);
-    const [lastCompletedModule, setLastCompletedModule] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
-    const [errorMessage, setErrorMessage] = useState("");
 
-    useEffect(() => {
-        async function loadData() {
-            try {
-                const moduleData = await getModules();
-                setModules(moduleData);
-                const progress = await getMyProgress();
-                setLastCompletedModule(progress.lastCompletedModule ?? 0);
-            } catch (error) {
-                setErrorMessage(error.message);
-            } finally {
-                setIsLoading(false);
-            }
+        const modulesQuery = useQuery({
+            queryKey: ["modules"],
+            queryFn: getModules,
+        });
+
+        const progressQuery = useQuery({
+            queryKey: ["moduleProgress"],
+            queryFn: getMyProgress,
+        });
+
+        if (modulesQuery.isLoading || progressQuery.isLoading) {
+            return <p>Loading module...</p>
         }
-        loadData();
-    }, []);
 
-    if (isLoading) {
-        return <p>Loading modules...</p>
-    }
+        const modules = modulesQuery.data ?? [];
+        const lastCompletedModule = progressQuery.data?.lastCompletedModule ?? 0;
+        const errorMessage =
+            modulesQuery.error?.message ?? progressQuery.error?.message;
 
+ 
     return (
         <div className="modulesAndQuiz">
             <div className=" container main-box centered">
@@ -38,35 +35,30 @@ function ModuleListPage() {
                 {errorMessage && (
                     <p className="text-danger" role="alert">{errorMessage}</p>
                 )}
+
                 <div className="module-path">
                     {modules.map((module) => {
-                        const isLocked = lastCompletedModule + 1 < module.id;
-                        return isLocked ? (
-                            <span
+                        const isLocked = module.id > lastCompletedModule + 1;
+                        return (
+                            <Button
                                 key={module.id}
-                                className="btn-primary module-button disabled-module"
-                                aria-disabled="true"
+                                className={`module-button${isLocked ? " locked" : ""}`}
+                                disabled={isLocked}
+                                onClick={() => navigate (`/quiz/modules/${module.id}`)}
                             >
                                 {module.name}
-                            </span>
-                        ) : (
-                            <button
-                                key={module.id}
-                                className="btn-primary module-button"
-                                onClick={() => navigate(`/quiz/modules/${module.id}`)}
-                            >
-                                {module.name}
-                            </button>
+                            </Button>
                         );
                     })}
                 </div>
-                <div style={{ height: "15px" }}></div>
-                <button
-                    className="btn btn-secondary-custom"
+               
+                <Button
+                    type="button"
+                    className="btn btn-secondary-custom back-button"
                     onClick={() => navigate("/menu")}
                 >
                     Back to Menu
-                </button>
+                </Button>
             </div>
         </div>
     );

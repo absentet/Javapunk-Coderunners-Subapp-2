@@ -10,9 +10,8 @@ async function handleResponse(response) {
 }
 
 function authHeaders() {
-    return {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-    };
+        const token = localStorage.getItem("authToken");
+        return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 export async function getModules(token) {
@@ -26,4 +25,5 @@ export async function getMyProgress() {
     const response = await fetch(`${API_BASE_URL}/modules/progress`, {
         headers: authHeaders(),
     });
+    return handleResponse(response);
 }
