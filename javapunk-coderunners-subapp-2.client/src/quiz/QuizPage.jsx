@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import * as QuizService from "../services/quizService";
+import * as ModuleService from "../services/moduleService";
 import QuestionCard from "./QuestionCard"
+import Button from "../components/Button"
 import "../components/Layout.css";
 
 function QuizPage() {
     const { moduleId } = useParams();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedAnswerId, setSelectedAnswerId] = useState(null);
@@ -21,6 +24,15 @@ function QuizPage() {
         queryFn: () => QuizService.getQuestionsForModule(moduleId),
         refetchOnWindowFocus: false,
     });
+
+    const modulesQuery = useQuery({
+        queryKey: ["modules"],
+        queryFn: ModuleService.getModules,
+    });
+
+    const passScore = 60;
+    const nextModuleId = Number(moduleId) + 1;
+    const hasNextModule = (modulesQuery.data ?? [].some((m) => m.id === nextModuleId))
 
     //Check one answer
     const checkMutation = useMutation({
@@ -43,7 +55,10 @@ function QuizPage() {
     //Submit the quiz
     const submitMutation = useMutation({
         mutationFn: QuizService.submitQuiz,
-        onSuccess: (quizResult) => setResult(quizResult),
+        onSuccess: (quizResult) => {
+            setResult(quizResult);
+            queryClient.invalidateQueries({ queryKey: ["moduleProgress"] });
+        },
     });
 
     const currentQuestion = questions[currentIndex];
@@ -99,12 +114,35 @@ function QuizPage() {
     }
 
     if (result) {
+        const passed = result.score >= passScore;
+
         return (
             <div className="modulesAndQuiz">
                 <div className="score">
                     <h3>Quiz finished</h3>
                     <p>Score: {result.score}</p>
                     <p>Correct answers: {result.correctCount} / {result.totalQuestions}</p>
+                </div>
+                {!passed && (
+                    <p>You need at least {passScore} points to unlock the next module.</p>
+                )}
+
+                <div className="question-actions">
+                    <Button
+                        className="btn-secondary-custom"
+                        onClick={() => navigate("/modules")}
+                    >
+                        Back to modules
+                    </Button>
+
+                    {passed && hasNextModule && (
+                        <Button
+                            className="btn-secondary-custom"
+                            onClick={() => navigate(`/quiz/modules/${nextModuleId}`)}
+                        >
+                            Next module
+                        </Button>
+                    )}
                 </div>
             </div>
         );

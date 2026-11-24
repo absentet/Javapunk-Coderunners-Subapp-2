@@ -174,3 +174,10 @@
 .back-button {
     margin-top: 10px;
 }
+
+.question-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}

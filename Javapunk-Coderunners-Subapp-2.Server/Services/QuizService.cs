@@ -1,6 +1,9 @@
 using Javapunk_Coderunners_Subapp_2.Server.Dtos;
 using Javapunk_Coderunners_Subapp_2.Server.Models;
 using Javapunk_Coderunners_Subapp_2.Server.Repositories;
+using Javapunk_Coderunners_Subapp_2.Server.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Javapunk_Coderunners_Subapp_2.Server.Services;
 
@@ -12,14 +15,18 @@ public class QuizService : IQuizService
     private readonly IModuleRepository _moduleRepository;
     private readonly ILogger<QuizService> _logger;
     private readonly Random _random = new();
+    private const int PassScore = 60;
+    private readonly QuizDbContext _context;
 
     public QuizService(
         IQuestionRepository questionRepository,
         IModuleRepository moduleRepository,
+        QuizDbContext context,
         ILogger<QuizService> logger)
     {
         _questionRepository = questionRepository;
         _moduleRepository = moduleRepository;
+        _context = context;
         _logger = logger;
     }
 
@@ -130,6 +137,60 @@ public class QuizService : IQuizService
         catch (Exception e)
         {
             _logger.LogError(e, "Failed to calculate the quiz result");
+            throw;
+        }
+    }
+
+    //To record that the user has passed a module. If a new row is added, it returns true
+    public async Task<bool> MarkModuleCompletedAsync(int userId, List<AnswerSubmissionDto> answers, int score)
+    {
+        if (score < PassScore)
+        {
+            return false;
+        }
+
+        try
+        {
+            var questionIds = answers.Select(a => a.QuestionId).Distinct().ToList();
+
+            //Determining which module the submitted questions belong to
+            var moduleIds = await _context.Questions
+                .Where(q => questionIds.Contains(q.Id) && q.Modules != null)
+                .Select(q => q.Modules!.Id)
+                .Distinct()
+                .ToListAsync();
+            
+            //Excluding the exam mode that uses questions from multiple modules
+            if (moduleIds.Count != 1)
+            {
+                return false;
+            }
+
+            int moduleId = moduleIds[0];
+
+            bool alreadyCompleted = await _context.Completed_modules
+                .AnyAsync(cm => cm.Users.Id == userId && cm.Modules != null && cm.Modules.Id == moduleId);
+
+            if (alreadyCompleted)
+            {
+                return false;
+            }
+
+            var user = await _context.Users.FindAsync(userId);
+            var module = await _context.Modules.FindAsync(moduleId);
+
+            if (userId == null || module == null)
+            {
+                return false;
+            }
+
+            _context.Completed_modules.Add(new Completed_modules { Users = user, Modules = module });
+            await _context.SaveChangesAsync();
+            return true;
+        } 
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Failed to mark module as completed for user {UserId}", userId);
             throw;
         }
     }

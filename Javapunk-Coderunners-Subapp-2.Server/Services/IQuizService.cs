@@ -13,4 +13,6 @@ public interface IQuizService
     Task<int?> GetCorrectAnswerIdAsync(int questionId);
 
     Task<QuizResultDto> SubmitQuizAsync(List<AnswerSubmissionDto> answers);
+
+    Task<bool> MarkModuleCompletedAsync(int userId, List<AnswerSubmissionDto> answers, int score);
 }
