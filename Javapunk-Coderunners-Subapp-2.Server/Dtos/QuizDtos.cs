@@ -15,10 +15,11 @@ public record CheckAnswerResponse(bool IsCorrect, int? CorrectAnswerId);
 
 public record AnswerSubmissionDto(int QuestionId, int AnswerId);
 
-public record SubmitQuizRequest(List<AnswerSubmissionDto> Answers);
+public record SubmitQuizRequest(List<AnswerSubmissionDto> Answers, bool IsExam = false);
 
 public record QuizResultDto(int Score, int CorrectCount, int TotalQuestions);
 public record UpsertQuestionDto(int ModuleId, string QuestionText, List<CreateAnswerOptionDto> Answers);
 
 public record FetchQuestionDto(int questionId, int ModuleId, string QuestionText, List<CreateAnswerOptionDto> Answers);
 public record CreateAnswerOptionDto(string AnswerText, bool IsCorrect);
+

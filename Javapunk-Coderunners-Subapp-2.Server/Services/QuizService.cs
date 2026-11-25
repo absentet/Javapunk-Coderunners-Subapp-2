@@ -66,6 +66,7 @@ public class QuizService : IQuizService
         try
         {
             var questions = await _questionRepository.GetAllWithAnswersAsync();
+
             return PickRandomQuestions(questions, count);
         }
         catch (Exception e)

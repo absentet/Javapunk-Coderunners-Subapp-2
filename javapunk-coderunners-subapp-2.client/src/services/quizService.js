@@ -57,12 +57,22 @@ export async function checkAnswer(questionId, answerId) {
     return readResponse(response);
 }
 
-export async function submitQuiz(answers) {
+export async function getExamQuestions() {
+    const response = await fetch(`${API_BASE_URL}/quiz/exam`, 
+        {
+            method: "GET",
+            headers: getHeaders(),
+        }
+    );
+    return readResponse(response);
+}
+
+export async function submitQuiz(answers, isExam = false) {
     const response = await fetch(`${API_BASE_URL}/quiz/submit`,
         {
             method: "POST",
             headers: getHeaders(),
-            body: JSON.stringify({ answers })
+            body: JSON.stringify({ answers, isExam })
         }
     );
 

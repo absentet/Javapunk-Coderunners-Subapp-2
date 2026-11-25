@@ -50,6 +50,7 @@ function App() {
                             <Route path="/admin/options" element={<AdminOptionsPage />} />
                             <Route path="/admin/questions" element={<QnAOptionsPage />} />
                             <Route path="/quiz/modules/:moduleId" element={<QuizRoute />} />
+                            <Route path="/exam" element={<QuizPage isExam />} />
                             <Route path="/admin/modules" element={<ModuleOptionsPage />} />
                             <Route path="/admin/questions/create" element={<CreateQuestionPage />} />
                             <Route path="/admin/questions/edit" element={<ListEditQuestionsPage />} />

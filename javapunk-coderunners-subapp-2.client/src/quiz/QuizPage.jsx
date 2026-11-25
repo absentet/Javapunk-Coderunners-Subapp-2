@@ -7,7 +7,7 @@ import QuestionCard from "./QuestionCard"
 import Button from "../components/Button"
 import "../components/Layout.css";
 
-function QuizPage() {
+function QuizPage({ isExam = false}) {
     const { moduleId } = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -20,9 +20,13 @@ function QuizPage() {
     const [result, setResult] = useState(null);
 
     const { data: questions = [], isLoading, error } = useQuery({
-        queryKey: ["quizQuestions", moduleId],
-        queryFn: () => QuizService.getQuestionsForModule(moduleId),
+        queryKey: ["quizQuestions", isExam? "exam" : moduleId],
+        queryFn: () => 
+            isExam
+                ? QuizService.getExamQuestions()
+                : QuizService.getQuestionsForModule(moduleId),
         refetchOnWindowFocus: false,
+        gcTime: isExam ? 0 : undefined,
     });
 
     const modulesQuery = useQuery({
@@ -54,7 +58,7 @@ function QuizPage() {
 
     //Submit the quiz
     const submitMutation = useMutation({
-        mutationFn: QuizService.submitQuiz,
+        mutationFn: (answers) => QuizService.submitQuiz(answers, isExam),
         onSuccess: (quizResult) => {
             setResult(quizResult);
             queryClient.invalidateQueries({ queryKey: ["moduleProgress"] });
@@ -90,6 +94,13 @@ function QuizPage() {
         );
     };
 
+    const handleLeave = () => {
+        const ok = window.confirm("Leave the quiz? Your progress will be lost.");
+        if (ok) {
+            navigate(isExam ? "/menu" : "/modules");
+        }
+    };
+
     if (isLoading) {
         return (
             <div className="container main-box">
@@ -118,31 +129,32 @@ function QuizPage() {
 
         return (
             <div className="modulesAndQuiz">
-                <div className="score">
-                    <h3>Quiz finished</h3>
-                    <p>Score: {result.score}</p>
+                <div className="container main-box centered quiz-finished">
+                    <h2>Quiz complete!</h2>
+                    <p>Your score: {result.score}</p>
                     <p>Correct answers: {result.correctCount} / {result.totalQuestions}</p>
-                </div>
-                {!passed && (
-                    <p>You need at least {passScore} points to unlock the next module.</p>
-                )}
+                    
+                    {!isExam && !passed && (
+                        <p>You need at least {passScore} points to unlock the next module.</p>
+                    )}
 
-                <div className="question-actions">
-                    <Button
-                        className="btn-secondary-custom"
-                        onClick={() => navigate("/modules")}
-                    >
-                        Back to modules
-                    </Button>
-
-                    {passed && hasNextModule && (
+                    <div className="question-actions">
                         <Button
                             className="btn-secondary-custom"
-                            onClick={() => navigate(`/quiz/modules/${nextModuleId}`)}
+                            onClick={() => navigate(isExam ? "/menu" : "/modules")}
                         >
-                            Next module
+                            {isExam ? "Back to menu" : "Back to modules"}
                         </Button>
-                    )}
+
+                        {!isExam && passed && hasNextModule && (
+                            <Button
+                                className="btn-secondary-custom"
+                                onClick={() => navigate(`/quiz/modules/${nextModuleId}`)}
+                            >
+                                Next module
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </div>
         );
@@ -158,55 +170,64 @@ function QuizPage() {
 
     return (
         <div className="modulesAndQuiz">
-            <div className="score">
-                <h3>Current score:</h3>
-                <h3>{currentScore}</h3>
-            </div>
-            <div className="container main-box">
-                <p>Question {currentIndex + 1} of {questions.length}</p>
-                <h2>{currentQuestion.text}</h2>
+            <div className="quiz-layout">
+                <div className="container main-box quiz-header-box">
+                    <div className="quiz-header">
+                        <Button className="btn-secondary-custom" onClick={handleLeave}>
+                            Exit quiz
+                        </Button>
+                        <span className="quiz-progress">
+                            Question {currentIndex + 1} of {questions.length}
+                        </span>
+                        <span className="quiz-score">Score: {currentScore}</span>
+                    </div>
+                </div>
 
-                {errorMessage && (
-                    <p className="text-danger" role="alert">{errorMessage}</p>
-                )}
+                <div className="container main-box centered quiz-box">
+                    <h2>{currentQuestion.text}</h2>
 
-                <form onSubmit={handleSubmitAnswer}>
-                    <QuestionCard
-                        question={currentQuestion}
-                        selectedAnswerId={selectedAnswerId}
-                        onAnswerChange={setSelectedAnswerId}
-                        isAnswered={isAnswered}
-                        isChecking={checkMutation.isPending}
-                        correctAnswerId={correctAnswerId}
-                    />
-
-                    {!isAnswered ? (
-                        <button
-                            type="submit"
-                            className="btn btn-secondary-custom"
-                            disabled={checkMutation.isPending || selectedAnswerId === null}
-                        >
-                            {checkMutation.isPending ? "Checking..." : "Submit"}
-                        </button>
-                    ) : isLastQuestion ? (
-                        <button
-                            type="button"
-                            className="btn btn-secondary-custom"
-                            onClick={handleFinishQuiz}
-                            disabled={submitMutation.isPending}
-                        >
-                            {submitMutation.isPending ? "Finishing..." : "Finish Quiz"}
-                        </button>
-                    ) : (
-                        <button
-                            type="button"
-                            className="btn btn-secondary-custom"
-                            onClick={handleNextQuestion}
-                        >
-                            Next Question
-                        </button>
+                    {errorMessage && (
+                        <p className="text-danger" role="alert">{errorMessage}</p>
                     )}
-                </form>
+
+                    <form onSubmit={handleSubmitAnswer}>
+                        <QuestionCard
+                            question={currentQuestion}
+                            selectedAnswerId={selectedAnswerId}
+                            onAnswerChange={setSelectedAnswerId}
+                            isAnswered={isAnswered}
+                            isChecking={checkMutation.isPending}
+                            correctAnswerId={correctAnswerId}
+                        />
+
+                        {!isAnswered ? (
+                            <button
+                                type="submit"
+                                className="btn btn-secondary-custom"
+                                disabled={checkMutation.isPending || selectedAnswerId === null}
+                            >
+                                {checkMutation.isPending ? "Checking..." : "Submit"}
+                            </button>
+                        ) : isLastQuestion ? (
+                            <button
+                                type="button"
+                                className="btn btn-secondary-custom"
+                                onClick={handleFinishQuiz}
+                                disabled={submitMutation.isPending}
+                            >
+                                {submitMutation.isPending ? "Finishing..." : "Finish Quiz"}
+                            </button>
+                        ) : (
+                            <button
+                                type="button"
+                                className="btn btn-secondary-custom"
+                                onClick={handleNextQuestion}
+                            >
+                                Next Question
+                            </button>
+                        )}
+                    </form>
+                </div>
             </div>
         </div>
     );

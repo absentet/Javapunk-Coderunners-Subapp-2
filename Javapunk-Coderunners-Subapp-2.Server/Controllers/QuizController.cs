@@ -89,7 +89,10 @@ public class QuizController : ControllerBase
             return NotFound("Could not save the user's score.");
         }
 
-        await _quizService.MarkModuleCompletedAsync(userId, request.Answers, result.Score);
+        if (!request.IsExam)
+        {
+            await _quizService.MarkModuleCompletedAsync(userId, request.Answers, result.Score);
+        }
 
         return Ok(result);
     }

@@ -37,7 +37,6 @@ function RegisterPage() {
                     <input 
                         type="text" 
                         id="username" 
-                        className="form-control"
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}
                         autoComplete="username"
@@ -52,9 +51,9 @@ function RegisterPage() {
                     <input 
                         type="password" 
                         id="password" 
-                        className="form-control"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
+                        autoComplete="new-password"
                         minLength={6}
                         required 
                     />
@@ -67,18 +66,20 @@ function RegisterPage() {
                         </p>
                     )}
 
-                    {successMessage && (
-                        <p className="success-message" role="status">
-                            {successMessage} <Link to="/login/user">Go to Login</Link>
-                        </p>
+                    {successMessage ? (
+                        <div role="status">
+                            <p className="success-message">{successMessage}</p>
+                            <Link to="/login/user" className="btn btn-primary auth-login-button">Go to Login</Link>
+                        </div>
+                    ) : (
+                        <button 
+                            type="submit" 
+                            className="btn btn-primary" 
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? "Creating user..." : "Create User"}
+                        </button>
                     )}
-
-                    <button 
-                        type="submit" 
-                        className="btn btn-primary" 
-                        disabled={isSubmitting}>
-                        {isSubmitting ? "Creating user..." : "Create User"}
-                    </button>
                 </form>
             </div>
         </div>
