@@ -1,11 +1,11 @@
 import Button from "../components/Button";
 import "../components/Layout.css";
 import { useNavigate } from "react-router-dom";
-//import { useState } from "react";
+
+//Page that gives the option to login as user, create a user or login as admin
 
 function LoginChoicePage() {
     const navigate = useNavigate();
-    //Må lage en state for å holde styr på om man er logget inn eller ikke, og hvilken bruker som er logget inn.
     return (
         <div className="auth-page">
             <div className="container container-login">

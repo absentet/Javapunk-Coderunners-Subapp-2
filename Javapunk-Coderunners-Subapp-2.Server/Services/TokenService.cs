@@ -6,6 +6,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Javapunk_Coderunners_Subapp_2.Server.Services;
 
+//This is for creating JWT tokens that the client stores and sends
+//to the Authorization header after login. 
+//That way the server can recognise the user without a session
+
 public class TokenService : ITokenService
 {
     private readonly IConfiguration _configuration;

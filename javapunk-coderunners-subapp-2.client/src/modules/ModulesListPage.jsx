@@ -4,6 +4,9 @@ import { getModules, getMyProgress } from "../services/moduleService";
 import Button from "../components/Button";
 import "../components/Layout.css";
 
+//Page that shows the modules. For new users only one is unlocked.
+//When playing through the first module and 60p are scored, the next becomes available
+
 function ModuleListPage() {
     const navigate = useNavigate();
 

@@ -1,4 +1,4 @@
-//Generell knappe-komponent som kan brukes til flere ulike knapper
+//A general button component that gets used across pages
 import "./Button.css";
 
 function Button({ 

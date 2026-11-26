@@ -2,6 +2,8 @@ import Button from "../components/Button";
 import "../components/Layout.css";
 import { useNavigate } from "react-router-dom";
 
+//The first page of the application with a start-button
+
 function Home() {
     const navigate = useNavigate();
 

@@ -1,8 +1,9 @@
-//Normal login for users with an account
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import "../components/Layout.css";
+
+//Normal login for users with an account
 
 function LoginPage() {
     const navigate = useNavigate();

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../components/Layout.css";
 import { register } from "../services/authService";
+
 //Function to create new user account.
+
 function RegisterPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

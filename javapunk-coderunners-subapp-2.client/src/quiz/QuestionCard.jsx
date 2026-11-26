@@ -1,3 +1,8 @@
+//Function that shows the questions and lets the user pick 
+//One answer to submit
+//The correct answer gets colored green, and if a wrong  
+//answer is submitted it gets colored red
+
 function QuestionCard({
     question,
     selectedAnswerId,

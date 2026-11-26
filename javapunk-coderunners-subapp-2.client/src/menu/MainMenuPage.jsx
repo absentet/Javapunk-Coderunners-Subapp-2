@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import "../components/Layout.css";
 
+//Page that shows main menu with action options dependant on what type of user
+//has logged in (user or admin)
+//Normal users see Modules and Exam, admins se Module options and Question options
+
 function MainMenuPage() {
     const navigate = useNavigate();
     const { isAdmin, user } = useAuth();

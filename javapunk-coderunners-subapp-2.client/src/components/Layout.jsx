@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
+//Blurring background on all pages except the home page
+//Showing which user is logged in and a logout button 
+
 function Layout({ children, blurred = true }) {
     const { token, user, isAdmin, logout } = useAuth();
     const navigate = useNavigate();
