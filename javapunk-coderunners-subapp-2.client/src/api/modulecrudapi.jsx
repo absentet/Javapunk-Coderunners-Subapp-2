@@ -1,4 +1,4 @@
-const basePath = "https://localhost:7063/api/modulecrud";
+const basePath = "http://localhost:5147/api/modulecrud";
 
 export const CreateModule = async (moduleName) => {
     const response = await fetch(`${basePath}/create`, {

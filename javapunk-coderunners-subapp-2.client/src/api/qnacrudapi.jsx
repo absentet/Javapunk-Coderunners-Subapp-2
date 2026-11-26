@@ -1,4 +1,4 @@
-const basePath = "https://localhost:7063/api/qnacrud";
+const basePath = "http://localhost:5147/api/qnacrud";
 
 export const CreateQuestion = async (question) => {
     const response = await fetch(`${basePath}/create`, {
