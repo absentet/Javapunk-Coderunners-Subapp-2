@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import confetti from "canvas-confetti";
 import * as QuizService from "../services/quizService";
 import * as ModuleService from "../services/moduleService";
 import QuestionCard from "./QuestionCard"
@@ -100,6 +101,20 @@ function QuizPage({ isExam = false}) {
             navigate(isExam ? "/menu" : "/modules");
         }
     };
+
+    //Confetti when quiz is finished and at least 60 points scored
+    useEffect(() => {
+        if (result && result.score >= passScore) {
+            confetti({
+                particleCount: 400,
+                spread: 200,
+                startVelocity: 45,
+                origin: { y: 0.6 },
+                colors: ['#F7E40F', '#2A143D', '#47195D', '#6EBDEA', '#A995FF', '#D651D6']
+            });
+        }
+    }, [result, passScore]);
+
 
     if (isLoading) {
         return (
