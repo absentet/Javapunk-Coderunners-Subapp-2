@@ -298,3 +298,18 @@
     margin-top: 24px;
 }
 
+.music-player {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+}
+
+.music-player input[type="range"] {
+    width: 110px;
+    cursor: pointer;
+}
