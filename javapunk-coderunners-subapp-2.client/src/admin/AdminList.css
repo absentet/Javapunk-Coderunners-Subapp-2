@@ -45,3 +45,21 @@
 .admin-list-action {
     flex-shrink: 0;
 }
+
+.search-bar {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.search-bar .form-control {
+    box-sizing: border-box;
+}
+
+.search-bar input.form-control {
+    flex: 2;
+}
+
+.search-bar select.form-control {
+    flex: 1;
+}
