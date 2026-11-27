@@ -180,7 +180,7 @@ public class QuizService : IQuizService
             var user = await _context.Users.FindAsync(userId);
             var module = await _context.Modules.FindAsync(moduleId);
 
-            if (userId == null || module == null)
+            if (user == null || module == null)
             {
                 return false;
             }
